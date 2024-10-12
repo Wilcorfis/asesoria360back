@@ -12,6 +12,7 @@ import java.util.List;
 @RequestMapping("/notificaciones")
 @AllArgsConstructor
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class NotificacionController {
 
     @Autowired

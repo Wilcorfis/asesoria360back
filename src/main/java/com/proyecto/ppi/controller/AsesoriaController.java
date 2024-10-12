@@ -14,6 +14,7 @@ import java.util.List;
 @RequestMapping("/asesorias")
 @AllArgsConstructor
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AsesoriaController {
 
     @Autowired

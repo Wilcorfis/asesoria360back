@@ -13,6 +13,7 @@ import java.util.List;
 @RequestMapping("/asignaturas")
 @AllArgsConstructor
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AsignaturaController {
 
     @Autowired

@@ -14,7 +14,8 @@ import java.util.List;
 
 @RequestMapping("/retroalimentaciones")
 @AllArgsConstructor
-@Controller
+@RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class RetroalimentacionController {
 
     @Autowired

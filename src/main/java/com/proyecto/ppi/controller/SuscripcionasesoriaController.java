@@ -12,6 +12,7 @@ import java.util.List;
 @RequestMapping("/suscripcionasesoria")
 @AllArgsConstructor
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class SuscripcionasesoriaController {
 
     @Autowired
