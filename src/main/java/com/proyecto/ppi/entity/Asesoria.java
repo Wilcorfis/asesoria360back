@@ -43,6 +43,8 @@ public class Asesoria {
     private Date fecha_asesoria;
     private String ubicacion;
     private String estado;
+    private String visibilidad;
+    private int capacidad;
 
 }
 

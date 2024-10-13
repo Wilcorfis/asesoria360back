@@ -23,6 +23,7 @@ public class Usuario {
     private String primer_apellido;
     private String segundo_apellido;
     private String rol;
+    private String codigotutor;
     private String correo;
     private String clave;
     private String sexo;

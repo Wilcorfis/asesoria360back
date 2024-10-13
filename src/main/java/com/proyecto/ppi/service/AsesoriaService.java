@@ -53,6 +53,8 @@ public class AsesoriaService {
             asesoria.setFecha_asesoria(asesoriaDetails.getFecha_asesoria());
             asesoria.setUbicacion(asesoriaDetails.getUbicacion());
             asesoria.setEstado(asesoriaDetails.getEstado());
+            asesoria.setVisibilidad(asesoriaDetails.getVisibilidad());
+            asesoria.setCapacidad(asesoriaDetails.getCapacidad());
 
             // Actualizar las claves foráneas (asumiendo que las entidades relacionadas ya existen)
 
