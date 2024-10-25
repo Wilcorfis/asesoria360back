@@ -4,6 +4,8 @@ import com.proyecto.ppi.entity.Usuario;
 import com.proyecto.ppi.service.UsuarioService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
@@ -23,6 +25,16 @@ public class UsuarioController {
     @GetMapping("/tutores")
     public List<Usuario> obtenerTutores() {
         return usuarioService.obtenerTutores();
+    }
+    @PostMapping("/validarCorreo")
+    public ResponseEntity<Boolean> validarCorreo(@RequestBody String correo) {
+        // Validación del dominio de correo
+        if (correo.endsWith("@elpoli.edu.co") ) {
+            boolean esValido = usuarioService.verificarCorreo(correo);
+            return new ResponseEntity<>(esValido, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(false, HttpStatus.FORBIDDEN);
+        }
     }
 
     // Obtener todos los usuarios
