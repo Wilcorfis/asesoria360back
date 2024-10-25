@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/usuarios")
 @AllArgsConstructor
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UsuarioController {
 
     @Autowired

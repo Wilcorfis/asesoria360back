@@ -4,7 +4,9 @@ package com.proyecto.ppi.service;
 import com.proyecto.ppi.entity.Usuario;
 import com.proyecto.ppi.repository.UsuarioRepository;
 import lombok.AllArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +16,7 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
 
     public List<Usuario> obtenerTutores() {
         return usuarioRepository.findAllTutores();
@@ -28,6 +31,7 @@ public class UsuarioService {
     }
 
     public Usuario saveUsuario(Usuario usuario) {
+
         return usuarioRepository.save(usuario);
     }
 

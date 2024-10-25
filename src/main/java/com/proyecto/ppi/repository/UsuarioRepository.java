@@ -12,5 +12,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     // Buscar todos los tutores
     @Query("SELECT u FROM Usuario u WHERE u.rol = 'tutor'")
     List<Usuario> findAllTutores();
+
+    boolean existsByCorreo(String correo);
 }
 
