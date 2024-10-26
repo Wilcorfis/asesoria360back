@@ -33,6 +33,7 @@ public class UsuarioController {
             boolean esValido = usuarioService.verificarCorreo(correo);
             return new ResponseEntity<>(esValido, HttpStatus.OK);
         } else {
+           
             return new ResponseEntity<>(false, HttpStatus.FORBIDDEN);
         }
     }
