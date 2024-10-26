@@ -27,15 +27,15 @@ public class UsuarioController {
         return usuarioService.obtenerTutores();
     }
     @PostMapping("/validarCorreo")
-    public ResponseEntity<Boolean> validarCorreo(@RequestBody String correo) {
+    public ResponseEntity<Map<String, Boolean>> validarCorreo(@RequestBody Map<String, String> request) {
         // Validación del dominio de correo
+        String correo = request.get("correo");
+        Map<String, Boolean> response = new HashMap<>();
         if (correo.endsWith("@elpoli.edu.co") ) {
             boolean esValido = usuarioService.verificarCorreo(correo);
-            return new ResponseEntity<>(esValido, HttpStatus.OK);
-        } else {
-           
-            return new ResponseEntity<>(false, HttpStatus.FORBIDDEN);
+            response.put("body", esValido);
         }
+        return ResponseEntity.ok(response)
     }
 
     // Obtener todos los usuarios
