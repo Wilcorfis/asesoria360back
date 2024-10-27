@@ -51,7 +51,7 @@ public class UsuarioService {
             usuario.setRol(usuarioDetails.getRol());
             usuario.setCodigotutor(usuarioDetails.getCodigotutor());
             usuario.setCorreo(usuarioDetails.getCorreo());
-            usuario.setClave(usuarioDetails.getClave());
+
             usuario.setSexo(usuarioDetails.getSexo());
             usuario.setTelefono(usuarioDetails.getTelefono());
             usuario.setFecha_nacimiento(usuarioDetails.getFecha_nacimiento());

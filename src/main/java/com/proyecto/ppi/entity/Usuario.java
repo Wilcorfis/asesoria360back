@@ -25,7 +25,6 @@ public class Usuario {
     private String rol;
     private String codigotutor;
     private String correo;
-    private String clave;
     private String sexo;
     private int telefono;
     private Date fecha_nacimiento;
