@@ -37,6 +37,20 @@ public class UsuarioController {
         }
         return false;
     }
+        // Crear nuevo usuario con validación
+    @PostMapping
+    public Usuario createUsuario(@Valid @RequestBody Usuario usuario) {
+        if (usuario.correo.endsWith("@elpoli.edu.co") ) {
+        boolean existe=usuarioService.verificarCorreo(usuario.correo)
+        if(existe){
+            throw new IllegalArgumentException("Usuario ya registrado con este correo");
+
+        }
+        return usuarioService.saveUsuario(usuario);
+        }else{
+            throw new IllegalArgumentException("El correo no pertenece al poli");        
+        }
+    }
 
     // Obtener todos los usuarios
     @GetMapping
@@ -50,11 +64,7 @@ public class UsuarioController {
         return usuarioService.getUsuarioById(id);
     }
 
-    // Crear nuevo usuario con validación
-    @PostMapping
-    public Usuario createUsuario(@Valid @RequestBody Usuario usuario) {
-        return usuarioService.saveUsuario(usuario);
-    }
+
 
     // Actualizar usuario existente con validación
     @PutMapping("/{id}")
