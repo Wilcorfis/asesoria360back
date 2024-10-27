@@ -35,7 +35,7 @@ public class UsuarioController {
             return usuarioService.verificarCorreo(correo);
            
         }
-        return false
+        return false;
     }
 
     // Obtener todos los usuarios
