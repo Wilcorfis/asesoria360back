@@ -41,7 +41,7 @@ public class UsuarioController {
     @PostMapping
     public Usuario createUsuario(@Valid @RequestBody Usuario usuario) {
         if (usuario.correo.endsWith("@elpoli.edu.co") ) {
-        boolean existe=usuarioService.verificarCorreo(usuario.correo)
+        boolean existe=usuarioService.verificarCorreo(usuario.correo);
         if(existe){
             throw new IllegalArgumentException("Usuario ya registrado con este correo");
 
