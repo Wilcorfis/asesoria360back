@@ -21,6 +21,9 @@ public class UsuarioService {
     public List<Usuario> obtenerTutores() {
         return usuarioRepository.findAllTutores();
     }
+    public Usuario obtenerUsuarioPorCorreo(String correo) {
+        return usuarioRepository.findByCorreo(correo);
+    }
     public boolean verificarCorreo(String correo) {
         // Lógica para verificar si el correo pertenece a un usuario registrado en la base de datos
         return usuarioRepository.existsByCorreo(correo);

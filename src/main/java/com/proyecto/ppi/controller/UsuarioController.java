@@ -21,6 +21,11 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @GetMapping("usuarioporcorreo/{correo}")
+    public Usuario obtenerUsuarioPorCorreo(@PathVariable String correo) {
+        return usuarioService.obtenerUsuarioPorCorreo(correo);
+    }
+
     // Obtener todos los tutores
     @GetMapping("/tutores")
     public List<Usuario> obtenerTutores() {
