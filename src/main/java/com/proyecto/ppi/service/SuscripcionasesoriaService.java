@@ -25,6 +25,10 @@ public class SuscripcionasesoriaService {
         return suscripcionasesoriaRepository.findAll();
     }
 
+    public List<Suscripcionasesoria>  obtenerSuscripcionasesoriaPorid(Long id) {
+        return suscripcionasesoriaRepository.findByEstudianteIdUsuario(id);
+    }
+
     public Suscripcionasesoria getSuscripcionasesoriaById(Long id) {
         return suscripcionasesoriaRepository.findById(id).orElse(null);
     }

@@ -1,4 +1,5 @@
 package com.proyecto.ppi.controller;
+import com.proyecto.ppi.entity.Retroalimentacion;
 import com.proyecto.ppi.entity.Suscripcionasesoria;
 import com.proyecto.ppi.service.SuscripcionasesoriaService;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,11 @@ public class SuscripcionasesoriaController {
 
     @Autowired
     private SuscripcionasesoriaService SuscripcionasesoriaService;
+
+    @GetMapping("suscripcionporidusuario/{id}")
+    public List<Suscripcionasesoria> obtenerSuscripcionPorid(@PathVariable Long id) {
+        return SuscripcionasesoriaService.obtenerSuscripcionasesoriaPorid(id);
+    }
 
     // Obtener todas las Suscripcionasesoriaes
     @GetMapping

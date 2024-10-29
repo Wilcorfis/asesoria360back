@@ -24,6 +24,9 @@ public class NotificacionService {
     public List<Notificacion> getAllNotificaciones() {
         return notificacionRepository.findAll();
     }
+    public List<Notificacion> obtenerNotificacionesPorUsuario(Long idUsuario) {
+        return notificacionRepository.findByUsuarioIdUsuario(idUsuario);
+    }
 
     public Notificacion getNotificacionById(Long id) {
         return notificacionRepository.findById(id).orElse(null);

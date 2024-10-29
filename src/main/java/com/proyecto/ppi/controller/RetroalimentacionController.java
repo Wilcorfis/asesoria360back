@@ -1,5 +1,6 @@
 package com.proyecto.ppi.controller;
 
+import com.proyecto.ppi.entity.Notificacion;
 import com.proyecto.ppi.entity.Retroalimentacion;
 import com.proyecto.ppi.service.RetroalimentacionService;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,11 @@ public class RetroalimentacionController {
 
     @Autowired
     private RetroalimentacionService retroalimentacionService;
+
+    @GetMapping("retroalimentaionporidusuario/{id}")
+    public List<Retroalimentacion> obtenerRetroalimentacionPorid(@PathVariable Long id) {
+        return retroalimentacionService.obtenerRetroalimentacionPorid(id);
+    }
 
 
 

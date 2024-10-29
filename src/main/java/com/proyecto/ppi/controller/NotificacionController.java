@@ -1,5 +1,6 @@
 package com.proyecto.ppi.controller;
 import com.proyecto.ppi.entity.Notificacion;
+import com.proyecto.ppi.entity.Usuario;
 import com.proyecto.ppi.service.NotificacionService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,11 @@ public class NotificacionController {
 
     @Autowired
     private NotificacionService NotificacionService;
+
+    @GetMapping("notificacionporidusuario/{id}")
+    public List<Notificacion> obtenerNotificacionPorid(@PathVariable Long id) {
+        return NotificacionService.obtenerNotificacionesPorUsuario(id);
+    }
 
     // Obtener todas las Notificaciones
     @GetMapping

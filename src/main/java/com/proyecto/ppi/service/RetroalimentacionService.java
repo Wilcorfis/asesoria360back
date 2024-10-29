@@ -22,7 +22,9 @@ public class RetroalimentacionService {
     @Autowired
     private AsesoriaRepository asesoriaRepository;
 
-
+    public List<Retroalimentacion>  obtenerRetroalimentacionPorid(Long id) {
+        return retroalimentacionRepository.findByEstudianteIdUsuario(id);
+    }
 
     public List<Retroalimentacion> getAllRetroalimentaciones() {
         return retroalimentacionRepository.findAll();
