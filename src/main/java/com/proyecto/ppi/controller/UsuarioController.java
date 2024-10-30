@@ -31,16 +31,17 @@ public class UsuarioController {
     public List<Usuario> obtenerTutores() {
         return usuarioService.obtenerTutores();
     }
+
     @PostMapping("/validarCorreo")
     public boolean validarCorreo(@RequestBody String correo) {
         // Validación del dominio de correo
         
      
-        if (correo.endsWith("@elpoli.edu.co") ) {
+        //if (correo.endsWith("@elpoli.edu.co") ) {
             return usuarioService.verificarCorreo(correo);
            
-        }
-        return false;
+        //}
+        //return false;
     }
         // Crear nuevo usuario con validación
     @PostMapping

@@ -55,13 +55,7 @@ public class RetroalimentacionService {
                 throw new RuntimeException("Estudiante no encontrado o el usuario no es un estudiante");
             }
 
-            // Actualizar Tutor
-            Optional<Usuario> tutor = usuarioRepository.findById(retroalimentacionDetails.getTutor().getId_usuario());
-            if (tutor.isPresent() && tutor.get().getRol().equals("tutor")) {
-                retroalimentacion.setTutor(tutor.get());
-            } else {
-                throw new RuntimeException("Tutor no encontrado o el usuario no es un tutor");
-            }
+
 
             // Actualizar Asesoria
             Optional<Asesoria> asesoria = asesoriaRepository.findById(retroalimentacionDetails.getAsesoria().getId_asesoria());

@@ -28,11 +28,7 @@ public class Notificacion {
     @ManyToOne
     @JoinColumn(name = "fk_id_usuario", referencedColumnName = "id_usuario")
     private Usuario usuario;
-    @Getter
-    @Setter
-    @ManyToOne
-    @JoinColumn(name = "fk_id_asesoria", referencedColumnName = "id_asesoria")
-    private Asesoria asesoria;
+
 
 
     // Getters and Setters

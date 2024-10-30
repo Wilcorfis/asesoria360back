@@ -21,19 +21,14 @@ public class Retroalimentacion {
     @Setter
     @Getter
     @ManyToOne
-    @JoinColumn(name = "fk_id_usuarioest", referencedColumnName = "id_usuario")
+    @JoinColumn(name = "fk_id_usuario", referencedColumnName = "id_usuario")
     private Usuario estudiante;
-    @Setter
-    @Getter
-    @ManyToOne
-    @JoinColumn(name = "fk_id_usuariotut", referencedColumnName = "id_usuario")
-    private Usuario tutor;
+
     @Setter
     @Getter
     @ManyToOne
     @JoinColumn(name = "fk_id_asesoria", referencedColumnName = "id_asesoria")
     private Asesoria asesoria;
-    private String enviadopara;
     private int puntaje;
     private String comentarios;
     private Date fecha_retroalimentacion;

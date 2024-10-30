@@ -54,13 +54,7 @@ public class NotificacionService {
                 throw new RuntimeException("Usuario no encontrado");
             }
 
-            // Actualizar Asesoria (fk_id_asesoria)
-            Optional<Asesoria> asesoria = asesoriaRepository.findById(notificacionDetails.getAsesoria().getId_asesoria());
-            if (asesoria.isPresent()) {
-                notificacion.setAsesoria(asesoria.get());
-            } else {
-                throw new RuntimeException("Asesoría no encontrada");
-            }
+
 
             // Guardar la notificación actualizada
             return notificacionRepository.save(notificacion);

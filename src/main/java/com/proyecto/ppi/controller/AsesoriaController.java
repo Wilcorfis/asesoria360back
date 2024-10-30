@@ -20,7 +20,10 @@ public class AsesoriaController {
     @Autowired
     private AsesoriaService asesoriaService;
 
-
+    @GetMapping("/estudiante/{idEstudiante}")
+    public List<Asesoria> getAsesoriasPorEstudiante(@PathVariable Long idEstudiante) {
+        return asesoriaService.listarAsesoriasPorEstudiante(idEstudiante);
+    }
 
     // Obtener todas las asesorías
     @GetMapping
@@ -28,7 +31,7 @@ public class AsesoriaController {
         return asesoriaService.getAllAsesorias();
     }
 
-    // Obtener asesoría por ID
+    // Obtener asesoría por ID_asesoria
     @GetMapping("/{id}")
     public Asesoria getAsesoriaById(@PathVariable Long id) {
         return asesoriaService.getAsesoriaById(id);

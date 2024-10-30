@@ -30,6 +30,10 @@ public class AsesoriaService {
     @Autowired
     private AsignaturaRepository asignaturaRepository;
 
+    public List<Asesoria> listarAsesoriasPorEstudiante(Long idEstudiante) {
+        return asesoriaRepository.findAsesoriasByEstudianteId(idEstudiante);
+    }
+
 
 
 
