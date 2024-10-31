@@ -3,6 +3,8 @@ package com.proyecto.ppi.entity;
 
 import jakarta.persistence.*;
 import java.util.Date;
+
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -30,13 +32,13 @@ public class Asesoria {
     @Setter
     @Getter
     @ManyToOne
-    @JoinColumn(name = "fk_id_usuariotut", referencedColumnName = "id_usuario")
+    @JoinColumn(name = "fk_id_usuariotut", referencedColumnName = "id_usuario", nullable=false)
     private Usuario tutor;
 
     @Setter
     @Getter
     @ManyToOne
-    @JoinColumn(name = "fk_id_asignatura", referencedColumnName = "id_asignatura")
+    @JoinColumn(name = "fk_id_asignatura", referencedColumnName = "id_asignatura",nullable=false)
     private Asignatura asignatura;
 
     private Date fecha_creacion;
