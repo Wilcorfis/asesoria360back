@@ -37,6 +37,10 @@ public class AsesoriaController {
     public List<Asesoria> getAsesoriasPorEstudiante(@PathVariable Long idEstudiante) {
         return asesoriaService.listarAsesoriasPorEstudiante(idEstudiante);
     }
+    @GetMapping("/tutor/{idTutor}")
+    public List<Asesoria> getAsesoriasPortutor(@PathVariable Long idTutor) {
+        return asesoriaService.listarAsesoriasPorTutor(idTutor);
+    }
 
     // Obtener todas las asesorías
     @GetMapping

@@ -34,8 +34,9 @@ public class AsesoriaService {
         return asesoriaRepository.findAsesoriasByEstudianteId(idEstudiante);
     }
 
-
-
+    public List<Asesoria> listarAsesoriasPorTutor(Long idTutor) {
+        return asesoriaRepository.findAsesoriasByTutorId(idTutor);
+    }
 
     public List<Asesoria> getAllAsesorias() {
         return asesoriaRepository.findAll();
