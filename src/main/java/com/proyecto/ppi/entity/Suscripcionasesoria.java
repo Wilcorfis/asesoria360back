@@ -22,7 +22,7 @@ public class Suscripcionasesoria {
     @Setter
     @Getter
     @ManyToOne
-    @JoinColumn(name = "fk_id_usuarioest", referencedColumnName = "id_usuario")
+    @JoinColumn(name = "fk_id_estudiante", referencedColumnName = "id_usuario")
     private Usuario estudiante;
 
     @Setter
