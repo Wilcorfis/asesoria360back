@@ -14,7 +14,7 @@ public interface AsesoriaRepository extends JpaRepository<Asesoria, Long> {
     @Query("SELECT a FROM Asesoria a JOIN Suscripcionasesoria s ON a.id_asesoria = s.asesoria.id_asesoria WHERE s.estudiante.id_usuario = :idEstudiante")
     List<Asesoria> findAsesoriasByEstudianteId(@Param("idEstudiante") Long idEstudiante);
 
-    @Query("SELECT a FROM Asesoria a JOIN Suscripcionasesoria s ON a. id_usuariotut =:idTutor")
+    @Query("SELECT a FROM Asesoria  a WHERE a.tutor.id_usuario =:idTutor")
     List<Asesoria> findAsesoriasByTutorId(@Param("idTutor") Long idTutor);
 }
 
