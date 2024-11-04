@@ -12,7 +12,10 @@ import java.util.List;
 @Repository
 public interface RetroalimentacionRepository extends JpaRepository<Retroalimentacion, Long> {
     @Query("SELECT r FROM Retroalimentacion r WHERE r.estudiante.id_usuario = :idUsuario")
-    Retroalimentacion findByEstudianteIdUsuario(@Param("idUsuario") Long idUsuario);
+    Retroalimentacion findByEstudianteIdUsuario2(@Param("idUsuario") Long idUsuario);
+
+    @Query("SELECT r FROM Retroalimentacion r WHERE r.estudiante.id_usuario = :idUsuario")
+    List<Retroalimentacion> findByEstudianteIdUsuario(@Param("idUsuario") Long idUsuario);
 
 }
 

@@ -23,8 +23,12 @@ public class RetroalimentacionController {
     private RetroalimentacionService retroalimentacionService;
 
     @GetMapping("retroalimentaionporidusuario/{id}")
-    public Retroalimentacion obtenerRetroalimentacionPorid(@PathVariable Long id) {
+    public List<Retroalimentacion> obtenerRetroalimentacionPorid(@PathVariable Long id) {
         return retroalimentacionService.obtenerRetroalimentacionPorid(id);
+    }
+    @GetMapping("retroalimentaionporidusuario2/{id}")
+    public Retroalimentacion obtenerRetroalimentacionPorid2(@PathVariable Long id) {
+        return retroalimentacionService.obtenerRetroalimentacionPorid2(id);
     }
 
 
