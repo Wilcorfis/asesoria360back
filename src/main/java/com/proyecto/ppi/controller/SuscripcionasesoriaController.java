@@ -20,7 +20,7 @@ public class SuscripcionasesoriaController {
     private SuscripcionasesoriaService SuscripcionasesoriaService;
 
     @GetMapping("suscripcionporidusuario/{id}")
-    public List<Suscripcionasesoria> obtenerSuscripcionPorid(@PathVariable Long id) {
+    public Suscripcionasesoria obtenerSuscripcionPorid(@PathVariable Long id) {
         return SuscripcionasesoriaService.obtenerSuscripcionasesoriaPorid(id);
     }
 
