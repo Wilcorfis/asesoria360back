@@ -55,6 +55,6 @@ public class SuscripcionasesoriaController {
     }
     @GetMapping("/contar-estudiantes")
     public Long contarEstudiantesPorAsesoria(@RequestParam Long asesoriaId) {
-        return suscripcionasesoriaService.contarEstudiantesPorAsesoria(asesoriaId);
+        return SuscripcionasesoriaService.contarEstudiantesPorAsesoria(asesoriaId);
     }
 }
