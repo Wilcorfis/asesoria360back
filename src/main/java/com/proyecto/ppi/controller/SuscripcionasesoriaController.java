@@ -53,4 +53,8 @@ public class SuscripcionasesoriaController {
     public void deleteSuscripcionasesoria(@PathVariable Long id) {
         SuscripcionasesoriaService.deleteSuscripcionasesoria(id);
     }
+    @GetMapping("/contar-estudiantes")
+    public Long contarEstudiantesPorAsesoria(@RequestParam Long asesoriaId) {
+        return suscripcionasesoriaService.contarEstudiantesPorAsesoria(asesoriaId);
+    }
 }

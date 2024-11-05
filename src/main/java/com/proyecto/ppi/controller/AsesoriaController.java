@@ -79,11 +79,9 @@ public class AsesoriaController {
         return asesoriaService.updateAsesoria(id, asesoriaDetails);
     }
 
-    // Eliminar asesoría por ID
-    @DeleteMapping("/{id}")
-    public void deleteAsesoria(@PathVariable Long id) {
-
-        asesoriaService.deleteAsesoria(id);
+    @DeleteMapping("/{fkIdAsesoria}")
+    public void eliminarRetroalimentacionYAsesoria(@PathVariable Long fkIdAsesoria) {
+        asesoriaService.eliminarRetroalimentacionYAsesoria(fkIdAsesoria);
     }
 }
 

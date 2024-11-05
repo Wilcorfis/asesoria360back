@@ -20,8 +20,11 @@ public class AsesoriaService {
     @Autowired
     private AsesoriaRepository asesoriaRepository;
 
+
     @Autowired
     private RetroalimentacionRepository retroalimentacionRepository;
+    @Autowired
+    private SuscripcionasesoriaRepository suscripcionasesoriaRepository;
 
     @Autowired
     private UsuarioRepository usuarioRepository; // Para acceder a estudiantes y tutores
@@ -94,9 +97,12 @@ public class AsesoriaService {
         }).orElseThrow(() -> new RuntimeException("Asesoría no encontrada"));
     }
 
-    public void deleteAsesoria(Long id) {
-        retroalimentacionRepository.deleteByFkIdAsesoria(id);
-        asesoriaRepository.deleteById(id);
+    public void eliminarRetroalimentacionYAsesoria(Long fkIdAsesoria) {
+        // Primero elimina los registros de retroalimentacion asociados a fkIdAsesoria
+        retroalimentacionRepository.deleteByFkIdAsesoria(fkIdAsesoria);
+        suscripcionasesoriaRepository.deleteByIdAsesoria(fkIdAsesoria);
+        // Luego elimina el registro en la tabla asesoria
+        asesoriaRepository.deleteByIdAsesoria(fkIdAsesoria);
     }
 }
 

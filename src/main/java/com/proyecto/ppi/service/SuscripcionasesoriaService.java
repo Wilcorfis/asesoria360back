@@ -69,4 +69,7 @@ public class SuscripcionasesoriaService {
     public void deleteSuscripcionasesoria(Long id) {
         suscripcionasesoriaRepository.deleteById(id);
     }
+    public Long contarEstudiantesPorAsesoria(Long asesoriaId) {
+        return suscripcionasesoriaRepository.countByAsesoriaId(asesoriaId);
+    }
 }
