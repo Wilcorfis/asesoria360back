@@ -8,6 +8,7 @@ import com.proyecto.ppi.repository.AsignaturaRepository;
 import com.proyecto.ppi.repository.HorarioRepository;
 import com.proyecto.ppi.repository.UsuarioRepository;
 import com.proyecto.ppi.service.AsesoriaService;
+import com.proyecto.ppi.service.RetroalimentacionService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -81,6 +82,7 @@ public class AsesoriaController {
     // Eliminar asesoría por ID
     @DeleteMapping("/{id}")
     public void deleteAsesoria(@PathVariable Long id) {
+
         asesoriaService.deleteAsesoria(id);
     }
 }

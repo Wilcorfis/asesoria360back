@@ -4,10 +4,7 @@ import com.proyecto.ppi.entity.Asesoria;
 import com.proyecto.ppi.entity.Asignatura;
 import com.proyecto.ppi.entity.Horario;
 import com.proyecto.ppi.entity.Usuario;
-import com.proyecto.ppi.repository.AsesoriaRepository;
-import com.proyecto.ppi.repository.UsuarioRepository;
-import com.proyecto.ppi.repository.HorarioRepository;
-import com.proyecto.ppi.repository.AsignaturaRepository;
+import com.proyecto.ppi.repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +19,9 @@ public class AsesoriaService {
 
     @Autowired
     private AsesoriaRepository asesoriaRepository;
+
+    @Autowired
+    private RetroalimentacionRepository retroalimentacionRepository;
 
     @Autowired
     private UsuarioRepository usuarioRepository; // Para acceder a estudiantes y tutores
@@ -75,7 +75,7 @@ public class AsesoriaService {
 
             // Actualizar Tutor
             Optional<Usuario> tutor = usuarioRepository.findById(asesoriaDetails.getTutor().getId_usuario());
-            if (tutor.isPresent() && tutor.get().getRol().equals("tutor")) {
+            if (tutor.isPresent() && tutor.get().getRol().equals("Tutor")) {
                 asesoria.setTutor(tutor.get());
             } else {
                 throw new RuntimeException("Tutor no encontrado o el usuario no es un tutor");
@@ -95,6 +95,7 @@ public class AsesoriaService {
     }
 
     public void deleteAsesoria(Long id) {
+        retroalimentacionRepository.deleteByFkIdAsesoria(id);
         asesoriaRepository.deleteById(id);
     }
 }

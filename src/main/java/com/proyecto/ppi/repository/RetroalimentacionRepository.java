@@ -17,5 +17,8 @@ public interface RetroalimentacionRepository extends JpaRepository<Retroalimenta
     @Query("SELECT r FROM Retroalimentacion r WHERE r.estudiante.id_usuario = :idUsuario")
     List<Retroalimentacion> findByEstudianteIdUsuario(@Param("idUsuario") Long idUsuario);
 
+    @Query("DELETE FROM Retroalimentacion r WHERE r.asesoria.id_asesoria = :fkIdAsesoria")
+    void deleteByFkIdAsesoria(@Param("fkIdAsesoria") Long fkIdAsesoria);
+
 }
 

@@ -22,6 +22,10 @@ public class RetroalimentacionService {
     @Autowired
     private AsesoriaRepository asesoriaRepository;
 
+    public void eliminarPorFkIdAsesoria(Long fkIdAsesoria) {
+      retroalimentacionRepository.deleteByFkIdAsesoria(fkIdAsesoria);
+    }
+
     public Retroalimentacion  obtenerRetroalimentacionPorid2(Long id) {
         return retroalimentacionRepository.findByEstudianteIdUsuario2(id);
     }
@@ -52,7 +56,7 @@ public class RetroalimentacionService {
 
             // Actualizar Estudiante
             Optional<Usuario> estudiante = usuarioRepository.findById(retroalimentacionDetails.getEstudiante().getId_usuario());
-            if (estudiante.isPresent() && estudiante.get().getRol().equals("estudiante")) {
+            if (estudiante.isPresent() && estudiante.get().getRol().equals("Estudiante")) {
                 retroalimentacion.setEstudiante(estudiante.get());
             } else {
                 throw new RuntimeException("Estudiante no encontrado o el usuario no es un estudiante");
