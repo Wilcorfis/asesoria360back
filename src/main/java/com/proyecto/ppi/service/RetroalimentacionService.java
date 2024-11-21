@@ -25,6 +25,9 @@ public class RetroalimentacionService {
     public void eliminarPorFkIdAsesoria(Long fkIdAsesoria) {
       retroalimentacionRepository.deleteByFkIdAsesoria(fkIdAsesoria);
     }
+    public List<Retroalimentacion> getRetroalimentacionByTutor(Long idTutor) {
+        return retroalimentacionRepository.findByTutorId(idTutor);
+    }
 
     public Retroalimentacion  obtenerRetroalimentacionPorid2(Long id) {
         return retroalimentacionRepository.findByEstudianteIdUsuario2(id);

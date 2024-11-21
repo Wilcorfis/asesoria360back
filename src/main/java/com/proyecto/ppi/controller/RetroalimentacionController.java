@@ -39,6 +39,10 @@ public class RetroalimentacionController {
     public Retroalimentacion obtenerRetroalimentacionPorid2(@PathVariable Long id) {
         return retroalimentacionService.obtenerRetroalimentacionPorid2(id);
     }
+    @GetMapping("retroalimentaionporidtutor/{idTutor}")
+    public List<Retroalimentacion> getRetroalimentacionPorTutor(@PathVariable Long idTutor) {
+        return retroalimentacionService.getRetroalimentacionByTutor(idTutor);
+    }
 
     // Obtener todas las retroalimentaciones
     @GetMapping

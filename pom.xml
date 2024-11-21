@@ -37,8 +37,9 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>42.2.24</version>  <!-- Asegúrate de usar una versión adecuada -->
+			<version>42.6.0</version>
 		</dependency>
+
 
 
 		<dependency>
