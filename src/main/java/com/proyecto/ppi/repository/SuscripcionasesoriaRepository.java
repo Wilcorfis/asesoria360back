@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface SuscripcionasesoriaRepository extends JpaRepository<Suscripcionasesoria, Long> {
     @Query("SELECT s FROM Suscripcionasesoria s WHERE s.estudiante.id_usuario = :idUsuario")
-    Suscripcionasesoria findByEstudianteIdUsuario(@Param("idUsuario") Long idUsuario);
+    List<Suscripcionasesoria> findByEstudianteIdUsuario(@Param("idUsuario") Long idUsuario);
 
     @Modifying
     @Transactional

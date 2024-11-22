@@ -17,6 +17,10 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    // Implementación del método loadUserByUsername()
+
+
+
 
     public List<Usuario> obtenerTutores() {
         return usuarioRepository.findAllTutores();

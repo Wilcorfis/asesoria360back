@@ -1,14 +1,25 @@
 package com.proyecto.ppi.controller;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+
+
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
+import java.util.Date;
 
 import com.proyecto.ppi.entity.Usuario;
 import com.proyecto.ppi.service.UsuarioService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
+
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import java.util.List;
 
 
@@ -17,6 +28,11 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UsuarioController {
+    private final String SECRET_KEY = "abcdefghijklmnopqrstuvwxy1234567890abcdefghijklmnopqrstuv"; // Mínimo 256 bits
+    private final SecretKey secretKey = new SecretKeySpec(SECRET_KEY.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
+
+
+
 
     @Autowired
     private UsuarioService usuarioService;
@@ -42,6 +58,30 @@ public class UsuarioController {
            
         //}
         //return false;
+    }
+
+    private final long EXPIRATION_TIME = 86400000; // 1 día en milisegundos
+      // El email como el subject (el "subject" es el campo de usuario)
+
+    @GetMapping(value ="/generartoken/{email}")//, produces = MediaType.TEXT_PLAIN_VALUE
+    public String validateEmail(@PathVariable String email) {
+        // Validar el email (puedes agregar lógica adicional si es necesario)
+        if (email == null || email.isEmpty()) {
+            throw new IllegalArgumentException("El email no puede estar vacío.");
+        }
+
+
+
+
+        // Generar el token JWT
+        String token = Jwts.builder()
+                .setSubject(email)
+                .setIssuedAt(new Date()) // Fecha de creación del token
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME)) // Expiración
+                .signWith(secretKey, SignatureAlgorithm.HS256) // Firma con la clave secreta
+                .compact();
+
+        return token;
     }
         // Crear nuevo usuario con validación
     @PostMapping
