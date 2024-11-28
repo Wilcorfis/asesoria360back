@@ -116,13 +116,24 @@ public class AsesoriaController {
 
     // Actualizar asesoría existente con validación
     @PutMapping("/{id}")
-    public Asesoria updateAsesoria(@PathVariable Long id, @Valid @RequestBody Asesoria asesoriaDetails) {
-        return asesoriaService.updateAsesoria(id, asesoriaDetails);
+    public Asesoria updateAsesoria(@PathVariable Long id, @Valid @RequestBody Asesoria asesoriaDetails, @RequestHeader("Authorization") String authorization) {
+        if (asesoriaDetails.getTutor().getCorreo().equals(validateToken(authorization).getSubject())){
+            return asesoriaService.updateAsesoria(id,asesoriaDetails);
+
+        }
+        throw new IllegalArgumentException("El correo del tutor no coincide con el token");
+
     }
 
     @DeleteMapping("/{fkIdAsesoria}")
-    public void eliminarRetroalimentacionYAsesoria(@PathVariable Long fkIdAsesoria) {
-        asesoriaService.eliminarRetroalimentacionYAsesoria(fkIdAsesoria);
+    public void eliminarRetroalimentacionYAsesoria(@PathVariable Long fkIdAsesoria, @RequestHeader("Authorization") String authorization) {
+       Asesoria asesoria= asesoriaService.getAsesoriaById(fkIdAsesoria);
+        if (asesoria.getTutor().getCorreo().equals(validateToken(authorization).getSubject())){
+            asesoriaService.eliminarRetroalimentacionYAsesoria(fkIdAsesoria);
+
+        }
+        throw new IllegalArgumentException("El correo del tutor no coincide con el token");
+
     }
 }
 

@@ -1,9 +1,9 @@
 package com.proyecto.ppi.controller;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.proyecto.ppi.entity.Asesoria;
+import io.jsonwebtoken.*;
 
 
+import io.jsonwebtoken.io.DecodingException;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +30,34 @@ import java.util.List;
 public class UsuarioController {
     private final String SECRET_KEY = "abcdefghijklmnopqrstuvwxy1234567890abcdefghijklmnopqrstuv"; // Mínimo 256 bits
     private final SecretKey secretKey = new SecretKeySpec(SECRET_KEY.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
+    public Claims validateToken(String token) {
+        try {
+            // Validar si el token contiene el prefijo "Bearer "
+            if (token.startsWith("Bearer ")) {
+                token = token.substring(7); // Remover "Bearer " del token
+            }
 
+            // Validar que el token no esté vacío después de eliminar el prefijo
+            if (token.isBlank()) {
+                throw new IllegalArgumentException("El token está vacío después de eliminar el prefijo Bearer");
+            }
+
+            // Decodificar y validar el token
+            return Jwts.parserBuilder()
+                    .setSigningKey(secretKey) // Clave secreta debe estar configurada correctamente
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (ExpiredJwtException e) {
+            throw new IllegalArgumentException("Token expirado", e);
+        } catch (UnsupportedJwtException e) {
+            throw new IllegalArgumentException("Formato de token no soportado", e);
+        } catch (MalformedJwtException e) {
+            throw new IllegalArgumentException("Token mal formado", e);
+        } catch (DecodingException e) {
+            throw new IllegalArgumentException("Error de decodificación del token", e);
+        }
+    }
 
 
 
@@ -70,9 +97,6 @@ public class UsuarioController {
             throw new IllegalArgumentException("El email no puede estar vacío.");
         }
 
-
-
-
         // Generar el token JWT
         String token = Jwts.builder()
                 .setSubject(email)
@@ -85,14 +109,19 @@ public class UsuarioController {
     }
         // Crear nuevo usuario con validación
     @PostMapping
-    public Usuario createUsuario(@Valid @RequestBody Usuario usuario) {
+    public Usuario createUsuario(@Valid @RequestBody Usuario usuario, @RequestHeader("Authorization") String authorization) {
         //if (usuario.getCorreo().endsWith("@elpoli.edu.co") ) {
         boolean existe=usuarioService.verificarCorreo(usuario.getCorreo());
         if(existe){
             throw new IllegalArgumentException("Usuario ya registrado con este correo");
 
         }else{
-            return usuarioService.saveUsuario(usuario);
+            if (usuario.getCorreo().equals(validateToken(authorization).getSubject())){
+                return usuarioService.saveUsuario(usuario);
+
+            }
+            throw new IllegalArgumentException("El correo no coincide con el token");
+
         }
 
         //}else{
@@ -116,14 +145,25 @@ public class UsuarioController {
 
     // Actualizar usuario existente con validación
     @PutMapping("/{id}")
-    public Usuario updateUsuario(@PathVariable Long id, @Valid @RequestBody Usuario usuarioDetails) {
-        return usuarioService.updateUsuario(id, usuarioDetails);
+    public Usuario updateUsuario(@PathVariable Long id, @Valid @RequestBody Usuario usuarioDetails, @RequestHeader("Authorization") String authorization) {
+        if (usuarioDetails.getCorreo().equals(validateToken(authorization).getSubject())){
+            return usuarioService.updateUsuario(id, usuarioDetails);
+
+        }
+        throw new IllegalArgumentException("El correo no coincide con el token");
+
     }
 
     // Eliminar usuario por ID
     @DeleteMapping("/{id}")
-    public void deleteUsuario(@PathVariable Long id) {
-        usuarioService.deleteUsuario(id);
+    public void deleteUsuario(@PathVariable Long id, @RequestHeader("Authorization") String authorization) {
+        Usuario usuario= usuarioService.getUsuarioById(id);
+        if (usuario.getCorreo().equals(validateToken(authorization).getSubject())){
+            usuarioService.deleteUsuario(id);
+
+        }
+        throw new IllegalArgumentException("El correo  no coincide con el token");
+
     }
 }
 

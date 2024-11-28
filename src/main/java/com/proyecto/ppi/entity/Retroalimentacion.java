@@ -2,6 +2,11 @@ package com.proyecto.ppi.entity;
 
 import jakarta.persistence.*;
 import java.util.Date;
+
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -29,8 +34,14 @@ public class Retroalimentacion {
     @ManyToOne
     @JoinColumn(name = "fk_id_asesoria", referencedColumnName = "id_asesoria")
     private Asesoria asesoria;
+    @Min(value = 1, message = "El puntaje mínimo debe ser 1")
+    @Max(value = 5, message = "El puntaje máximo debe ser 5")
+    @NotNull(message = "el puntaje no puede ser nula")
     private int puntaje;
+    @Size(max = 500, message = "Los comentarios no pueden exceder los 500 caracteres")
+    @NotNull(message = "comentarios not debe ser null")
     private String comentarios;
+    @NotNull(message = "La fecha de retroalimentación no puede ser nula")
     private Date fecha_retroalimentacion;
 
     // Getters and Setters
