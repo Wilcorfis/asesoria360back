@@ -25,7 +25,7 @@ public class Horario {
     @NotNull(message = "La hora de inicio no puede ser nula")
     private java.sql.Time hora_inicio;
     @NotNull(message = "La hora de fin no puede ser nula")
-    @FutureOrPresent(message = "La hora de fin debe ser igual o posterior a la hora actual")
+    //@FutureOrPresent(message = "La hora de fin debe ser igual o posterior a la hora actual")
     private java.sql.Time hora_fin;
 
     // Getters and Setters
