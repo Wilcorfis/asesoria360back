@@ -6,6 +6,7 @@ import com.proyecto.ppi.repository.AsignaturaRepository;
 import com.proyecto.ppi.repository.HorarioRepository;
 import com.proyecto.ppi.repository.UsuarioRepository;
 import com.proyecto.ppi.service.RetroalimentacionService;
+import com.proyecto.ppi.service.UsuarioService;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.DecodingException;
 import lombok.AllArgsConstructor;
@@ -95,19 +96,20 @@ public class RetroalimentacionController {
     // Crear nueva retroalimentación con validación
     @PostMapping
     public Retroalimentacion createRetroalimentacion(@Valid @RequestBody Retroalimentacion retroalimentacion, @RequestHeader("Authorization") String authorization) {
-        if (retroalimentacion.getEstudiante().getCorreo().equals(validateToken(authorization).getSubject())){
+        Usuario us= usuarioRepository.getReferenceById(retroalimentacion.getEstudiante().getId_usuario());
+        if (us.getCorreo().equals(validateToken(authorization).getSubject())){
             return retroalimentacionService.saveRetroalimentacion(retroalimentacion);
 
         }
-        throw new IllegalArgumentException("El correo del tutor no coincide con el token");
+        throw new IllegalArgumentException("El correo no coincide con el token");
 
     }
 
     // Actualizar retroalimentación existente con validación
     @PutMapping("/{id}")
     public Retroalimentacion updateRetroalimentacion(@PathVariable Long id, @Valid @RequestBody Retroalimentacion retroalimentacionDetails, @RequestHeader("Authorization") String authorization) {
-
-        if (retroalimentacionDetails.getEstudiante().getCorreo().equals(validateToken(authorization).getSubject())){
+        Usuario us= usuarioRepository.getReferenceById(retroalimentacionDetails.getEstudiante().getId_usuario());
+        if (us.getCorreo().equals(validateToken(authorization).getSubject())){
             return retroalimentacionService.updateRetroalimentacion(id, retroalimentacionDetails);
 
         }
@@ -128,11 +130,12 @@ public class RetroalimentacionController {
     @DeleteMapping("/{id}")
     public void deleteRetroalimentacion(@PathVariable Long id, @RequestHeader("Authorization") String authorization) {
         Retroalimentacion retro= retroalimentacionService.getRetroalimentacionById(id);
-        if (retro.getEstudiante().getCorreo().equals(validateToken(authorization).getSubject())){
+        Usuario us= usuarioRepository.getReferenceById(retro.getEstudiante().getId_usuario());
+        if (us.getCorreo().equals(validateToken(authorization).getSubject())){
             retroalimentacionService.deleteRetroalimentacion(id);
 
         }
-        throw new IllegalArgumentException("El correo no coincide con el token");
+
 
     }
 }

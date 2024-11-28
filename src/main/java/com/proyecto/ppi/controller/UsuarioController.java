@@ -162,7 +162,7 @@ public class UsuarioController {
             usuarioService.deleteUsuario(id);
 
         }
-        throw new IllegalArgumentException("El correo  no coincide con el token");
+
 
     }
 }

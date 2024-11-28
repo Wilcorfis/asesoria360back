@@ -1,6 +1,8 @@
 package com.proyecto.ppi.controller;
 import com.proyecto.ppi.entity.Retroalimentacion;
 import com.proyecto.ppi.entity.Suscripcionasesoria;
+import com.proyecto.ppi.entity.Usuario;
+import com.proyecto.ppi.repository.UsuarioRepository;
 import com.proyecto.ppi.service.SuscripcionasesoriaService;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.DecodingException;
@@ -54,6 +56,8 @@ public class SuscripcionasesoriaController {
 
     @Autowired
     private SuscripcionasesoriaService SuscripcionasesoriaService;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @GetMapping("suscripcionporidusuario/{id}")
     public List<Suscripcionasesoria> obtenerSuscripcionPorid(@PathVariable Long id) {
@@ -75,7 +79,8 @@ public class SuscripcionasesoriaController {
     // Crear nueva  con validación
     @PostMapping
     public Suscripcionasesoria createSuscripcionasesoria(@Valid @RequestBody Suscripcionasesoria suscripcionasesoria, @RequestHeader("Authorization") String authorization) {
-        if (suscripcionasesoria.getEstudiante().getCorreo().equals(validateToken(authorization).getSubject())){
+        Usuario us= usuarioRepository.getReferenceById(suscripcionasesoria.getEstudiante().getId_usuario());
+        if (us.getCorreo().equals(validateToken(authorization).getSubject())){
             return SuscripcionasesoriaService.saveSuscripcionasesoria(suscripcionasesoria);
 
         }
