@@ -1,5 +1,6 @@
 package com.proyecto.ppi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.util.Date;
 
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "retroalimentacion")
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Retroalimentacion {
 
     @Id

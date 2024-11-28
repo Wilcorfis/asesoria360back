@@ -1,6 +1,7 @@
 package com.proyecto.ppi.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.util.Date;
 
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "asesoria")
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Asesoria {
 
     @Id
@@ -43,7 +45,6 @@ public class Asesoria {
     @NotNull(message = "La fecha de creación no puede ser nula")
     private Date fecha_creacion;
     @NotNull(message = "La fecha de asesoria no puede ser nula")
-    @FutureOrPresent(message = "La fecha de la asesoría debe ser en el presente o futuro")
     private Date fecha_asesoria;
     @NotBlank(message = "La ubicación no puede estar vacía")
     private String ubicacion;

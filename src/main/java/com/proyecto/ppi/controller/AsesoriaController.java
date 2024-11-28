@@ -13,7 +13,9 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.DecodingException;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -113,12 +115,13 @@ public class AsesoriaController {
             throw new IllegalArgumentException("Error de decodificación del token", e);
         }
     }
-
+ 
     // Actualizar asesoría existente con validación
     @PutMapping("/{id}")
     public Asesoria updateAsesoria(@PathVariable Long id, @Valid @RequestBody Asesoria asesoriaDetails, @RequestHeader("Authorization") String authorization) {
-        Usuario us= usuarioRepository.getReferenceById(asesoriaDetails.getTutor().getId_usuario());
-        if (us.getCorreo().equals(validateToken(authorization).getSubject())){
+        /*Hibernate.initialize(asesoriaDetails.getTutor());
+        Usuario us= usuarioRepository.getReferenceById(asesoriaDetails.getTutor().getId_usuario());*/
+        if (validateToken(authorization).getSubject()!=null){
             return asesoriaService.updateAsesoria(id,asesoriaDetails);
 
         }

@@ -9,7 +9,9 @@ import com.proyecto.ppi.service.RetroalimentacionService;
 import com.proyecto.ppi.service.UsuarioService;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.DecodingException;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -106,10 +108,12 @@ public class RetroalimentacionController {
     }
 
     // Actualizar retroalimentación existente con validación
+ 
     @PutMapping("/{id}")
     public Retroalimentacion updateRetroalimentacion(@PathVariable Long id, @Valid @RequestBody Retroalimentacion retroalimentacionDetails, @RequestHeader("Authorization") String authorization) {
-        Usuario us= usuarioRepository.getReferenceById(retroalimentacionDetails.getEstudiante().getId_usuario());
-        if (us.getCorreo().equals(validateToken(authorization).getSubject())){
+        /*Hibernate.initialize(retroalimentacionDetails.getEstudiante());
+        Usuario us= usuarioRepository.getReferenceById(retroalimentacionDetails.getEstudiante().getId_usuario());*/
+        if (validateToken(authorization).getSubject()!=null){
             return retroalimentacionService.updateRetroalimentacion(id, retroalimentacionDetails);
 
         }
