@@ -39,7 +39,7 @@ public class Usuario {
     @Size(max = 100, message = "El correo no puede exceder los 100 caracteres")
     private String correo;
     @NotBlank(message = "El sexo no puede estar vacío")
-    @Pattern(regexp = "^(Masculino|Femenino)$", message = "El sexo debe ser Masculino, Femenino")
+    @Pattern(regexp = "^(masculino|femenino)$", message = "El sexo debe ser Masculino, Femenino")
     private String sexo;
     @NotNull(message = "El teléfono no puede estar vacío")
     private int telefono;
