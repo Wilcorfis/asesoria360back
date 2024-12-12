@@ -42,7 +42,7 @@ public class Usuario {
     @Pattern(regexp = "^(masculino|femenino)$", message = "El sexo debe ser Masculino, Femenino")
     private String sexo;
     @NotNull(message = "El teléfono no puede estar vacío")
-    private int telefono;
+    private String telefono;
     @NotNull(message = "La fecha de nacimiento no puede ser nula")
     private Date fecha_nacimiento;
     @NotBlank(message = " no puede estar vacío")
