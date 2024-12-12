@@ -109,20 +109,21 @@ public class UsuarioController {
     }
         // Crear nuevo usuario con validación
     @PostMapping
-    public Usuario createUsuario(@Valid @RequestBody Usuario usuario, @RequestHeader("Authorization") String authorization) {
+    public Usuario createUsuario(@Valid @RequestBody Usuario usuario) {
         //if (usuario.getCorreo().endsWith("@elpoli.edu.co") ) {
         boolean existe=usuarioService.verificarCorreo(usuario.getCorreo());
         if(existe){
             throw new IllegalArgumentException("Usuario ya registrado con este correo");
 
         }else{
-            if (usuario.getCorreo().equals(validateToken(authorization).getSubject())){
+            
                 return usuarioService.saveUsuario(usuario);
 
-            }
-            throw new IllegalArgumentException("El correo no coincide con el token");
+            
+         
 
         }
+          
 
         //}else{
           //  throw new IllegalArgumentException("El correo no pertenece al poli");
